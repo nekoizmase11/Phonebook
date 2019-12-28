@@ -10,9 +10,9 @@ namespace Phonebook.Bussines.Contracts.DbContextInterface
 {
     public interface IContext
     {
-        IUserRepository UserRep { get; }
-        IContactRepository ContactRep { get; }
-        IChangePasswordRequestRepository ChangePasswordRequestRep { get; }
+        IUserRepository UserRepository { get; }
+        IContactRepository ContactRepository { get; }
+        IChangePasswordRequestRepository ChangePasswordRequestRepository { get; }
 
     }
 }
