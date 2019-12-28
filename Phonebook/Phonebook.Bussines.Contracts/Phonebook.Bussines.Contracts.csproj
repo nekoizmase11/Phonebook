@@ -42,6 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbContextInterface\IContext.cs" />
+    <Compile Include="Exceptions\DataException.cs" />
+    <Compile Include="Exceptions\DuplicateDataException.cs" />
+    <Compile Include="Exceptions\InvalidDataException.cs" />
     <Compile Include="Models\ChangePasswordRequest.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\User.cs" />
@@ -49,6 +52,7 @@
     <Compile Include="RepositoryInterfaces\IChangePasswordRequestRepository.cs" />
     <Compile Include="RepositoryInterfaces\IContactRepository.cs" />
     <Compile Include="RepositoryInterfaces\IUserRepository.cs" />
+    <Compile Include="UnitOfWorkInterface\IUnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

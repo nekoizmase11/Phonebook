@@ -57,7 +57,7 @@ namespace Phonebook.Data.SQLServerDbContext
             }
         }
 
-        public IChangePasswordRequestRepository ChangePasswordRequestRepository
+        public IChangePasswordRequestRepository ChangePasswordRequestRepository 
         {
             get
             {
