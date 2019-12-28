@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Phonebook.Data.UnitOfWork
+namespace Phonebook.Data.SQLServerUnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
