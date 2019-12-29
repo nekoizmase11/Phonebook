@@ -19,6 +19,7 @@ namespace Phonebook.Presentation.Web
 
             // e.g. container.RegisterType<ITestService, TestService>();
 
+            container.RegisterType<IBussinesLayer, BussinesLayer>();
             container.RegisterType<IContext, SQLServerContext>(new InjectionConstructor(ConfigurationManager.ConnectionStrings["myConnection"].ConnectionString));
 
 
