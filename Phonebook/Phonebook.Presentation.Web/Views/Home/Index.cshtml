@@ -1,31 +1,110 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
+﻿@model IEnumerable<Phonebook.Presentation.Web.Models.ContactVM>
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+    @{
+    /**/
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    ViewBag.Title = "Index";
+    }
+
+    <h2>Contacts:</h2>
+    <div style="border: 1px solid black">
+        <form id="searchFrom">
+            <div class="form-group">
+
+                <span>Ime</span><input checked="checked" type="checkbox" name="ime" value="true" />
+                <span style="margin-left:2.5em">Prezime</span><input style="margin-left:0.4em" type="checkbox" name="prezime" value="true" />
+                <span style="margin-left:2.5em">Email</span><input style="margin-left:0.4em" type="checkbox" name="email" value="true" />
+                <span style="margin-left:2.5em">Broj</span><input style="margin-left:0.4em" type="checkbox" name="broj" value="true" />
+
+                <input style="margin-left:2.5em;margin-top: 0.4em" type="text" placeholder="Search" name="SearchTextBox" />
+                <input id="searchBTN" type="button" value="Search" class="btn btn-default" />
+
+            </div>
+        </form>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <div id="resultContainer">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Number)
+                </th>
+
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+            using (Html.BeginForm("Delete", "Home", new { id = item.id }))
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LName)
+                </td>
+                <td>
+                    @Html.ActionLink(item.Email, "SendEmail", new { EmailTo = item.Email })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Number)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id_user)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                    <input type="submit" value="Delete" />
+
+                </td>
+            </tr>
+            }
+            }
+
+
+        </table>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+    
+    
+    
+    @section scripts{
+    <script>
+        $(document).ready(function () {
+
+            $("#searchBTN").click(function () {
+                debugger
+                var data = $("#searchFrom").serialize();
+
+                $.ajax({
+
+                    type: "POST",
+                    url: "/Home/Search",
+                    data: data,
+                    success: function (response) {
+
+                        $("#resultContainer").html(response)
+                    }
+
+                })
+            })
+
+        })
+
+
+    </script>
+    }
+
+

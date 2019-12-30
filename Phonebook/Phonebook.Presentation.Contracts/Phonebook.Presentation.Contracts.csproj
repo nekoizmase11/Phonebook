@@ -47,8 +47,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataTransferObjects\ChangedPasswordDto.cs" />
+    <Compile Include="DataTransferObjects\ChangePasswordEmailDto.cs" />
     <Compile Include="DataTransferObjects\ContactDto.cs" />
+    <Compile Include="DataTransferObjects\EmailDto.cs" />
     <Compile Include="DataTransferObjects\UserDto.cs" />
+    <Compile Include="Exceptions\ServiceDataException.cs" />
+    <Compile Include="Exceptions\ServiceDuplicateDataException.cs" />
+    <Compile Include="Exceptions\ServiceInvalidDataException.cs" />
     <Compile Include="LuceneSearchHelper\FieldNames.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceInterfaces\IChangePasswordRequestService.cs" />

@@ -39,6 +39,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,9 +49,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BussinesLayer.cs" />
+    <Compile Include="Exceptions\DuplicateDataDataSourceException.cs" />
+    <Compile Include="Exceptions\InvalidDataDataSourceException.cs" />
+    <Compile Include="IBussinesLayer.cs" />
     <Compile Include="Infrastructure\LuceneSearch\LuceneIndexingService\DocumentProvider.cs" />
+    <Compile Include="Infrastructure\LuceneSearch\LuceneIndexingService\ILuceneSearchIndexingService.cs" />
+    <Compile Include="Infrastructure\LuceneSearch\LuceneIndexingService\LuceneSearchIndexingService.cs" />
+    <Compile Include="Infrastructure\LuceneSearch\LuceneSearchService\Extensions\IndexSearcherExtensions.cs" />
+    <Compile Include="Infrastructure\LuceneSearch\LuceneSearchService\ILuceneSearchService.cs" />
+    <Compile Include="Infrastructure\LuceneSearch\LuceneSearchService\LuceneSearchService.cs" />
     <Compile Include="Infrastructure\StringHasher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ChangePasswordRequestService.cs" />
+    <Compile Include="Services\ContactService.cs" />
+    <Compile Include="Services\MailService.cs" />
     <Compile Include="Services\SearchService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>

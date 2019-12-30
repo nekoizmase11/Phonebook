@@ -1,6 +1,10 @@
 ﻿using Lucene.Net.Analysis.Standard;
+using Lucene.Net.Documents;
 using Lucene.Net.Index;
+using Lucene.Net.Search;
 using Lucene.Net.Store;
+using Phonebook.Presentation.Contracts.DataTransferObjects;
+using Phonebook.Presentation.Contracts.LuceneSearchHelper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,7 +50,7 @@ namespace Phonebook.Bussines.Infrastructure.LuceneSearch.LuceneIndexingService
         }
 
         // index a single contact
-        public void IndexContact(ContactTM contact)
+        public void IndexContact(ContactDto contact)
         {
             IndexDocumentWithoutCommit(_documentProvider.GenerateDocument(contact));
         }
@@ -81,7 +85,7 @@ namespace Phonebook.Bussines.Infrastructure.LuceneSearch.LuceneIndexingService
         }
 
         // remove a contact from index
-        public void DeleteContact(ContactTM contact)
+        public void DeleteContact(ContactDto contact)
         {
             using (IndexWriter writer = GetIndexWriter())
             {

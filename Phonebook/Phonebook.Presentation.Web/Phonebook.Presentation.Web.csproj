@@ -133,10 +133,19 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ChangedPasswordVM.cs" />
+    <Compile Include="Models\ContactVM.cs" />
+    <Compile Include="Models\EmailAddressVM.cs" />
+    <Compile Include="Models\EmailVM.cs" />
+    <Compile Include="Models\LoginVM.cs" />
+    <Compile Include="Models\RegisterVM.cs" />
+    <Compile Include="Models\SearchVM.cs" />
+    <Compile Include="Models\UserVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -171,14 +180,22 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\ChangeForgottenPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Home\Create.cshtml" />
+    <Content Include="Views\Home\Edit.cshtml" />
+    <Content Include="Views\Home\SendEmail.cshtml" />
+    <Content Include="Views\Home\_Contacts.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Error\ServerError.cshtml" />
+    <Content Include="Views\Shared\_Contact.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -192,6 +209,24 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Phonebook.Bussines.Contracts\Phonebook.Bussines.Contracts.csproj">
+      <Project>{4A39318F-0976-4A80-B761-4D5B7846FF37}</Project>
+      <Name>Phonebook.Bussines.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Phonebook.Bussines\Phonebook.Bussines.csproj">
+      <Project>{ba020c5e-04f4-40ed-bfb7-0e7a43dba9f7}</Project>
+      <Name>Phonebook.Bussines</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Phonebook.Data\Phonebook.Data.csproj">
+      <Project>{6DF7033E-B527-42A3-9AC2-2E00EBB2BC75}</Project>
+      <Name>Phonebook.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Phonebook.Presentation.Contracts\Phonebook.Presentation.Contracts.csproj">
+      <Project>{D78BE8EE-49CD-4200-9B3F-2D69CDE8D32B}</Project>
+      <Name>Phonebook.Presentation.Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
