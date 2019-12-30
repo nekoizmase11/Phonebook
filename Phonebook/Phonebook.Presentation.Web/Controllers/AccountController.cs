@@ -30,6 +30,7 @@ namespace Phonebook.Presentation.Web.Controllers
 
         [HttpPost]
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public ActionResult Login(LoginVM model)
         {
             if (ModelState.IsValid)
@@ -73,6 +74,7 @@ namespace Phonebook.Presentation.Web.Controllers
 
         [HttpPost]
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterVM model)
         {
             if (!ModelState.IsValid)
@@ -103,6 +105,7 @@ namespace Phonebook.Presentation.Web.Controllers
 
         [HttpPost]
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public ActionResult ForgotPassword(EmailAddressVM emailAddress)
         {
             if (ModelState.IsValid)
@@ -152,6 +155,7 @@ namespace Phonebook.Presentation.Web.Controllers
 
         [AllowAnonymous]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult ChangeForgottenPassword(ChangedPasswordVM PasswordInfo)
         {
             if (ModelState.IsValid)

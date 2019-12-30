@@ -24,13 +24,10 @@ namespace Phonebook.Presentation.Web.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
-            FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+            string emailOfUser = System.Web.HttpContext.Current.User.Identity.Name;
+            //var emailOfUser = HttpContext.User.Identity.Name;
 
-            //var ime = System.Web.HttpContext.Current.User.Identity.Name;
-            //var imme = HttpContext.User.Identity.Name;
-
-            int id_user = _businesLayer.UserService.GetUserByEmail(ticket.Name).id;
+            int id_user = _businesLayer.UserService.GetUserByEmail(emailOfUser).id;
 
             IEnumerable<ContactVM> lista = _businesLayer.ContactService.ContactsByUser(id_user).Select(it => (ContactVM)it);
 
@@ -93,16 +90,16 @@ namespace Phonebook.Presentation.Web.Controllers
 
         [HttpPost]
         [Authorize]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(ContactVM contact)
         {
             if (ModelState.IsValid)
             {
                 try
-                {
-                    HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
-                    FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+                {            
+                    string emailOfUser = System.Web.HttpContext.Current.User.Identity.Name;
 
-                    _businesLayer.ContactService.CreateContact((ContactDto)contact, ticket.Name);
+                    _businesLayer.ContactService.CreateContact((ContactDto)contact, emailOfUser);
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -128,10 +125,9 @@ namespace Phonebook.Presentation.Web.Controllers
         {
             _businesLayer.ContactService.RemoveContact(id);
 
-            HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
-            FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+            string emailOfUser = System.Web.HttpContext.Current.User.Identity.Name;
 
-            int id_user = _businesLayer.UserService.GetUserByEmail(ticket.Name).id;
+            int id_user = _businesLayer.UserService.GetUserByEmail(emailOfUser).id;
             return RedirectToAction("Index", "Home");
         }
 
@@ -145,6 +141,7 @@ namespace Phonebook.Presentation.Web.Controllers
 
         [HttpPost]
         [Authorize]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(ContactVM contact)
         {
             try
@@ -155,13 +152,11 @@ namespace Phonebook.Presentation.Web.Controllers
             }
             catch (ServiceDuplicateDataException ex)
             {
-                // todo log
                 ModelState.AddModelError("email", "Email is already taken.");
                 return View(contact);
             }
             catch (ServiceInvalidDataException ex)
             {
-                // todo log
                 ViewData["ErrorMessage"] = ex.Message;
                 return View(contact);
             }
@@ -170,18 +165,16 @@ namespace Phonebook.Presentation.Web.Controllers
         [Authorize]
         public ActionResult SendEmail(string EmailTo)
         {
-            HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
-            FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
-
             EmailVM email = new EmailVM();
             email.To = EmailTo;
-            email.From = ticket.Name;
+            email.From = System.Web.HttpContext.Current.User.Identity.Name;
 
             return View(email);
         }
 
         [HttpPost]
         [Authorize]
+        [ValidateAntiForgeryToken]
         public ActionResult SendEmail(EmailVM email)
         {
             _businesLayer.MailService.SendEmail((EmailDto)email);
